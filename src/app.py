@@ -3,19 +3,12 @@ import logging
 import os
 import sys
 import traceback
-from typing import List
 
-import numpy as np
 from sentence_transformers import SentenceTransformer
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
-
-
-def get_sentence_emb(sentence: List[str]) -> np.ndarray:
-    model = SentenceTransformer("model/")
-    emb = model.encode(sentence)
-    return emb
+model = SentenceTransformer("model/")
 
 
 def lambda_handler(event, context):
@@ -24,10 +17,10 @@ def lambda_handler(event, context):
 
     try:
         sentences = event["body"]["sentence"]
-        emb = get_sentence_emb(sentences)
+        emb = model.encode(sentences)
         logging.info(emb)
 
-    except Exception as exp:
+    except Exception:
         exception_type, exception_value, exception_traceback = sys.exc_info()
         traceback_string = traceback.format_exception(exception_type, exception_value, exception_traceback)
         err_msg = json.dumps(
