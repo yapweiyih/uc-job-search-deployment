@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
-# This is for awscli v2
+# Calling LATEST
 aws lambda invoke \
     --cli-binary-format raw-in-base64-out \
-    --function-name sam-app-GetEmbeddingFunc-UX62MVS162XW \
+    --function-name embedding-GetEmbeddingFunc-HE1UG2AXZ076 \
     --invocation-type RequestResponse \
     --payload '{"body": {"sentence": ["this is a test", "this is another test"]}}' \
     response.json
 
 
-# Using Alias
+# Calling version:1
 aws lambda invoke \
     --cli-binary-format raw-in-base64-out \
-    --function-name sam-app-GetEmbeddingFunc-UX62MVS162XW:v1 \
+    --function-name embedding-GetEmbeddingFunc-HE1UG2AXZ076:1 \
     --invocation-type RequestResponse \
     --payload '{"body": {"sentence": ["this is a test", "this is another test"]}}' \
     response.json
