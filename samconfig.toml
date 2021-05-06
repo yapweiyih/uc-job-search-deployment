@@ -2,9 +2,9 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "sam-app"
+stack_name = "embedding1"
 s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-bjmvdommgc09"
-s3_prefix = "sam-app"
+s3_prefix = "embedding1"
 region = "ap-southeast-1"
 capabilities = "CAPABILITY_IAM"
 image_repositories = ["GetEmbeddingFunc=342474125894.dkr.ecr.ap-southeast-1.amazonaws.com/getembeddingfunc"]

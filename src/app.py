@@ -13,10 +13,10 @@ model = SentenceTransformer("model/")
 
 def lambda_handler(event, context):
     logger.error(event)
-    os.system("uname -a")
 
     try:
         sentences = event["body"]["sentence"]
+        logging.info(sentences)
         emb = model.encode(sentences)
         logging.info(emb)
 

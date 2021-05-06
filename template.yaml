@@ -4,9 +4,7 @@ Transform: AWS::Serverless-2016-10-31
 Parameters:
   ImageUri:
     Type: String
-    Default: 342474125894.dkr.ecr.ap-southeast-1.amazonaws.com/helloworldfunction
 
-# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
     Timeout: 300
@@ -16,15 +14,23 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       PackageType: Image
-      MemorySize: 10240
+      MemorySize: 5120
       ImageUri: !Ref ImageUri
-      Events:
-        HelloWorld:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-          Properties:
-            Path: /hello
-            Method: post
+      AutoPublishAlias: TEST
+      ProvisionedConcurrencyConfig:
+        ProvisionedConcurrentExecutions: 1
     Metadata:
       DockerTag: python3.7-v1
       DockerContext: ./src
       Dockerfile: Dockerfile
+
+Outputs:
+  Func:
+    Description: Lambda name
+    Value: !Ref GetEmbeddingFunc
+  FuncVersion:
+    Description: Lambda version
+    Value: !Ref GetEmbeddingFunc.Version
+  FuncAlias:
+    Description: Lambda alias
+    Value: !Ref GetEmbeddingFunc.Alias
